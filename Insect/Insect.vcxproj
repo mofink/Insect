@@ -75,12 +75,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Insect\Data.h" />
     <ClInclude Include="src\Insect.h" />
     <ClInclude Include="src\Insect\Application.h" />
     <ClInclude Include="src\Insect\Core.h" />
     <ClInclude Include="src\Insect\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Insect\Data.cpp" />
     <ClCompile Include="src\Insect\Application.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

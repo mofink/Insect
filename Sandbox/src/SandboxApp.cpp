@@ -1,9 +1,13 @@
 #include <Insect.h>
 
+#include <string>
+
+
 class Sandbox : public Insect::Application
 {
 public:
-   Sandbox()
+   Sandbox(std::string configFile)
+      : Application(configFile)
    {
 
    }
@@ -15,5 +19,6 @@ public:
 
 Insect::Application* Insect::CreateApplication()
 {
-   return new Sandbox();
+   std::string configFile = "dataConfig.txt";
+   return new Sandbox(configFile);
 }
