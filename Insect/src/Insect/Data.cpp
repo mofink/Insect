@@ -2,22 +2,51 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 
-Data::Data(std::string fileName)
+using namespace Insect;
+
+Data::Data(std::string fname)
 {
-   /*
+
+
    std::ifstream infile;
-   infile.open(fileName);
-   std::string STRING;
-   while (!infile.eof)
+   infile.open(fname);
+   std::string line;
+   bool firstLine = true;
+
+   //read in line by line (observations)
+   while (std::getline(infile, line))
    {
-      std::getline(infile, STRING);
-      std::cout << STRING << std::endl;
+      //skip the metadata
+      if (firstLine)
+      {
+         firstLine = false;
+         continue;
+      }
+
+      //tokenize the observation
+
+      std::vector<double> observation;
+      std::stringstream ss(line);
+      
+      //we don't need the observation number
+      ss.ignore(std::numeric_limits<std::streamsize>::max(), ','); 
+
+      for (double i; ss >> i;)
+      {
+         observation.push_back(i);
+         if (ss.peek() == ',')
+         {
+            ss.ignore();
+         }
+      }
+      myObservations.push_back(observation);
    }
    infile.close();
-   system("pause");
-   */
+
+
 }
 
 

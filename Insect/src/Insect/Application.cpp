@@ -4,12 +4,16 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <utility>
 
 
 using namespace Insect;
 
 Application::Application(std::string configFile)
 {
+   myApp = new ApplicationImp;
+
    myConfigFile = new std::string;
    *myConfigFile = configFile;
 }
@@ -18,6 +22,7 @@ Application::Application(std::string configFile)
 Application::~Application()
 {
    delete myConfigFile;
+   delete myApp;
 }
 
 void Application::run()
@@ -25,11 +30,33 @@ void Application::run()
 
    std::ifstream infile;
    infile.open(*myConfigFile);
-   std::string line;
-   while (std::getline(infile, line))
+   std::string fname;
+   while (std::getline(infile, fname))
    {
-      std::cout << line << std::endl;
+      myApp->loadFile(fname);
    }
    infile.close();
-   system("pause");
+}
+//---------------------------------------------------------------------
+
+
+Insect::ApplicationImp::ApplicationImp()
+   : myDataObjects{}
+{
+
+}
+
+Insect::ApplicationImp::~ApplicationImp()
+{
+   for (auto pData : myDataObjects)
+   {
+      delete pData;
+   }
+}
+
+bool ApplicationImp::loadFile(std::string fname)
+{
+   Data* pData = new Data(fname);
+   myDataObjects.push_back(pData);
+   return true;
 }

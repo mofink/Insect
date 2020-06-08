@@ -10,6 +10,7 @@ int main(int argc, char** argv)
 {
    auto app = Insect::CreateApplication();
    app->run();
+   system("pause");
    delete app;
 }
 #endif
